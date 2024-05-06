@@ -1,0 +1,37 @@
+import requests
+from bs4 import BeautifulSoup
+
+url = "https://www.ajio.com/"
+response = requests.get(url)
+soup = BeautifulSoup(response.content, "html.parser")
+
+# Find all <a> tags
+links = soup.find_all("a")
+
+for link in links:
+    print("Href:", link.get("href"))  # Extract the value of the href attribute
+    print("Text:", link.text)         # Extract the text within the <a> tag
+//data in json
+
+import requests
+from bs4 import BeautifulSoup
+import json
+
+url = "https://www.ajio.com/"
+response = requests.get(url)
+soup = BeautifulSoup(response.content, "html.parser")
+
+lists = soup.find_all("li")
+
+
+li_texts = []
+
+
+for li in lists:
+    li_texts.append(li.text.strip())  # Extract text and remove leading/trailing whitespace
+
+
+json_data = json.dumps(li_texts, indent=2)
+
+# Print or save the JSON data
+print(json_data)
